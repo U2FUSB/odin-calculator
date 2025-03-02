@@ -2,18 +2,6 @@
 > See [the corresponding odin page](https://www.theodinproject.com/lessons/foundations-calculator), which provides instructions for this short project
 
 ## TODOs
-###### STAGE 0:
-TESTS
-- should work:
-	- basic calculation with NUMBERS
-	- operations in the form NUMBER OPERATOR NUMBER OPERATOR NUMBER
-	- floats are rounded to fit the display
-	- after results, pressing new digit clears the result from the display. A new calculation is started
-- should  not work:
-	- calculation with strings
-	- pressing "=" on the calculator should only work, when numbers CAN be evaluated
-	- dividing by 0
-	- consecutive operators
 ###### STAGE 1: Basic calculations
 FUNCTIONAL
 - calculation functions:
