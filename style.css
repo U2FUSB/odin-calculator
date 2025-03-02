@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+body {
+    width: 100%;
+    height: 100%;
+}
+nav {}
+nav.title {}
+nav.reference-links {}
+.calculator-container {}
+.calculator-frame {}
+.display {}
+p.text-output {}
+.left-buttons {}
+.special-actions{}
+button.clear{}
+button.delete{}
+button.decimal-separator {}
+.numbers{}
+.numbers button{}
+.right-buttons {}
+.operations{}
+button.plus{}
+button.minus{}
+button.multiply{}
+button.divide{}
+button.result{}
