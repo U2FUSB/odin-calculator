@@ -2,15 +2,6 @@
 > See [the corresponding odin page](https://www.theodinproject.com/lessons/foundations-calculator), which provides instructions for this short project
 
 ## TODOs
-###### STAGE 1: Basic calculations
-FUNCTIONAL
-- calculation functions:
-	- add, subtract, multiply, divide functionality. Test in clg
-- input: 
-	- Operation => Number, Operator (String), Number
-	- variable for each
-- function `operate`:
-	- takes input, calls calculation function based on operator
 ###### STAGE 2: Calculator UI
 UI
 - buttons for digits and operators (for the = too)
