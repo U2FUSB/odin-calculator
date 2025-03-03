@@ -31,8 +31,8 @@ nav .flex-wrapper {
     padding: 0.5em;
 }
 nav .title {
-}
-nav .reference-links {
+    font-weight: bolder;
+    font-size: 1.5em;
 }
 /* main */
 main {
@@ -42,43 +42,59 @@ main {
     align-items: center;
 }
 .calculator-container {
+    margin-left: 10em;
+    margin-right: 10em;
 }
-.calculator-frame {
+.calculator-container .calculator-frame {
+    border: 2px outset black;
 }
-.calculator-container button {
+.calculator-container .calculator-frame.flex-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.calculator-container .display {
+    display: flex;
+    background-color: bisque;
+    border: 2px outset black;
+    justify-content: end;
+}
+.calculator-container .display .text-output {
+    min-height: 4rem;
+    max-height: 4rem;
+    max-width: 26rem;
+    font-size: 3em;
+    overflow: hidden;
+    direction: rtl;
+}
+.calculator-container .buttons.flex-wrapper {
+    display: flex;
+}
+.calculator-container .left-buttons.flex-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.calculator-container .left-buttons .special-actions.flex-wrapper {
+    display: flex;
+}
+.calculator-container .left-buttons .special-actions .clear {
+    flex-grow: 1;
+    font-size: 100;
+}
+.calculator-container .left-buttons .numbers .zero-to-other.flex-wrapper {
+    display: flex;
+}
+.calculator-container .left-buttons .numbers .flex-wrapper {
+    display: flex;
+}
+.calculator-container .left-buttons .numbers .zero {
+    flex-grow: 1;
+}
+.calculator-container .right-buttons .operations.flex-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.calculator-container .buttons button {
     font-size: 2em;
     height: 3em;
     width: 3em;
-}
-.display {
-}
-p.text-output {
-}
-.left-buttons {
-}
-.special-actions {
-}
-button.clear {
-}
-button.delete {
-}
-button.decimal-separator {
-}
-.numbers {
-}
-.numbers button {
-}
-.right-buttons {
-}
-.operations {
-}
-button.plus {
-}
-button.minus {
-}
-button.multiply {
-}
-button.divide {
-}
-button.result {
 }

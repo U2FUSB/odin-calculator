@@ -11,7 +11,7 @@
         <header>
             <nav>
                 <ul class="flex-wrapper">
-                    <li class="title" class="element">Odin Calculator</li>
+                    <li class="title element">Odin Calculator</li>
                     <li class="reference-links">
                         <ul>
                             <li>
@@ -35,36 +35,48 @@
         </header>
         <main>
             <section class="calculator-container">
-                <div class="calculator-frame">
+                <div class="flex-wrapper calculator-frame">
                     <div class="display">
                         <p class="text-output"></p>
                     </div>
-                    <div class="left-buttons">
-                        <div class="special-actions">
-                            <button class="clear">C</button>
-                            <button class="delete">DEL</button>
-                            <button class="decimal-separator">.</button>
+                    <div class="buttons flex-wrapper">
+                        <div class="left-buttons flex-wrapper">
+                            <div class="special-actions flex-wrapper">
+                                <button class="clear">C</button>
+                                <button class="delete">DEL</button>
+                                <button class="ust">1.2</button>
+                            </div>
+                            <div class="numbers">
+                                <div class="seven-to-nine flex-wrapper">
+                                    <button>7</button>
+                                    <button>8</button>
+                                    <button>9</button>
+                                </div>
+                                <div class="four-to-six flex-wrapper">
+                                    <button>4</button>
+                                    <button>5</button>
+                                    <button>6</button>
+                                </div>
+                                <div class="one-to-three flex-wrapper">
+                                    <button>1</button>
+                                    <button>2</button>
+                                    <button>3</button>
+                                </div>
+                                <div class="zero-to-other flex-wrapper">
+                                    <button class="zero">0</button>
+                                    <button class="double-zero">00</button>
+                                    <button class="decimal-separator">.</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="numbers">
-                            <button>1</button>
-                            <button>2</button>
-                            <button>3</button>
-                            <button>4</button>
-                            <button>5</button>
-                            <button>6</button>
-                            <button>7</button>
-                            <button>8</button>
-                            <button>9</button>
-                            <button>0</button>
-                        </div>
-                    </div>
-                    <div class="right-buttons">
-                        <div class="operations">
-                            <button class="plus">+</button>
-                            <button class="minus">-</button>
-                            <button class="multiply">*</button>
-                            <button class="divide">/</button>
-                            <button class="result">=</button>
+                        <div class="right-buttons">
+                            <div class="operations flex-wrapper">
+                                <button class="divide">/</button>
+                                <button class="multiply">*</button>
+                                <button class="minus">-</button>
+                                <button class="plus">+</button>
+                                <button class="result">=</button>
+                            </div>
                         </div>
                     </div>
                 </div>
