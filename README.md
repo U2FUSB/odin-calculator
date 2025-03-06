@@ -2,11 +2,6 @@
 > See [the corresponding odin page](https://www.theodinproject.com/lessons/foundations-calculator), which provides instructions for this short project
 
 ## TODOs
-###### STAGE 2: Calculator UI
-UI
-- buttons for digits and operators (for the = too)
-- calculator display 
-- "clear"-button
 ###### STAGE 3: Put calculations on display 1
 FUNCTIONAL
 - function `display` to 
