@@ -1,5 +1,7 @@
 import { tests } from "./tests.js";
 class Calculator {
+    displayElement = document.querySelector(".display .text-output");
+    buttons = [];
     operationDefinitions = {
         "+": function (num1, num2) {
             return num1 + num2;
@@ -14,6 +16,7 @@ class Calculator {
             return num1 / num2;
         },
     };
+    getButtons() {getLeafElements(document.querySelectorAll(".buttons"),this.buttons)}
     operate(operation) {
         const num1 = operation[0];
         const num2 = operation[2];
@@ -21,12 +24,21 @@ class Calculator {
 
         return this.operationDefinitions[operator](num1, num2);
     }
-    display(calculationOutput) {
-        
+    display(enteredDigit) {
+        this.displayElement.textContent += enteredDigit;
+        // this.displayElement.child
     }
 }
+function getLeafElements(elements,buttons) {
+    Array(...elements).forEach((element) => {
+        if (element.children.length !== 0) {
+            getLeafElements(element.children, buttons);
+        } else {
+            buttons.push(element);
+        }
+    });
+}
 const calculator = new Calculator();
-const displayElement = document.querySelector(".display .text-output");
-
-console.log(calculator.operate([1, "+", 1]));
+calculator.getButtons()
+console.log(calculator.buttons);
 tests();
