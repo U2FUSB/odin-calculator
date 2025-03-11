@@ -21,8 +21,12 @@ class Calculator {
 
         return this.operationDefinitions[operator](num1, num2);
     }
+    display(calculationOutput) {
+        
+    }
 }
-
 const calculator = new Calculator();
+const displayElement = document.querySelector(".display .text-output");
+
 console.log(calculator.operate([1, "+", 1]));
 tests();
