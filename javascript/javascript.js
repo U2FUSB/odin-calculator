@@ -22,15 +22,15 @@ class Calculator {
             return num1 / num2;
         },
     };
-    lastDisplayedInput = [];
+    savedInput = [];
     getButtons(cssParentClass) {
         const buttons = [];
         getLeafElements(document.querySelectorAll(cssParentClass), buttons);
         return buttons;
     }
     operate(operation) {
-        const num1 = operation[0];
-        const num2 = operation[2];
+        const num1 = Number(operation[0]);
+        const num2 = Number(operation[2]);
         const operator = operation[1];
 
         return this.operationDefinitions[operator](num1, num2);
@@ -45,9 +45,26 @@ class Calculator {
     setOperationButtons(buttons) {
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
-                this.lastDisplayedInput.push(this.displayElement.textContent);
-                this.lastDisplayedInput.push(button.textContent)
+                this.savedInput.push(this.displayElement.textContent);
+                this.savedInput.push(button.textContent);
                 this.displayElement.textContent = "";
+                console.log(this.savedInput);
+                if (this.savedInput.length === 4) {
+                    const [num1, operator, num2] = this.savedInput;
+                    const operationResult = this.operate([
+                        num1,
+                        operator,
+                        num2,
+                    ]).toString();
+                    this.displayElement.textContent = operationResult;
+                    if (button.textContent === "=") {
+                        this.savedInput.splice(0);
+                    } else {
+                        this.savedInput.splice(0,3);
+                        this.savedInput.unshift(operationResult);
+                        this.displayElement.textContent = "";
+                    }
+                }
             });
         });
     }
@@ -62,10 +79,15 @@ function getLeafElements(elements, leafElementContainer) {
     });
 }
 const calculator = new Calculator();
-
+const { allButtons, numberButtons, operationButtons } = calculator;
 console.groupCollapsed("Calculator contents");
-console.log(calculator.allButtons);
-console.log(calculator);
+console.table(Object.getOwnPropertyDescriptors(calculator));
+console.group("numbers");
+console.table([numberButtons]);
+console.groupEnd();
+console.group("operations");
+console.table([operationButtons]);
+console.groupEnd();
 console.groupEnd();
 
 tests();
