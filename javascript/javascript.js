@@ -1,5 +1,8 @@
 import { tests } from "./tests.js";
 class Calculator {
+    constructor() {
+        this.setDisplayableButtons(this.numberButtons);
+    }
     allButtons = this.getButtons(".buttons");
     numberButtons = this.getButtons(".numbers");
     displayElement = document.querySelector(".display .text-output");
@@ -29,8 +32,14 @@ class Calculator {
 
         return this.operationDefinitions[operator](num1, num2);
     }
-    displayNumberButtons(enteredDigit) {
-        this.displayElement.textContent += enteredDigit;
+    /**@param {[Element]} buttons  */
+    setDisplayableButtons(buttons) {
+        buttons.forEach(button => {
+            button.addEventListener("click",()=>{
+                this.displayElement.textContent += button.textContent
+            })
+        })
+        // this.displayElement.textContent += buttons.textContent;
     }
 }
 function getLeafElements(elements, leafElementContainer) {
@@ -43,6 +52,9 @@ function getLeafElements(elements, leafElementContainer) {
     });
 }
 const calculator = new Calculator();
+
+console.groupCollapsed("Calculator contents");
 console.log(calculator.allButtons);
 console.log(calculator);
+console.groupEnd("stuff");
 tests();
