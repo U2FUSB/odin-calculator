@@ -2,10 +2,6 @@
 > See [the corresponding odin page](https://www.theodinproject.com/lessons/foundations-calculator), which provides instructions for this short project
 
 ## TODOs
-###### STAGE 3: display function
-FUNCTIONAL
-- add functions for the digits to appear on the display when digit buttons are pressed
-- after "finished", the content of the display should be stored in a variable. (Finished prob. means the "=" or an operator was entered)
 ###### STAGE 4: 
 FUNCTIONAL
 - save first number, operator and second number input and run `operate` on them when "=" is pressed. 

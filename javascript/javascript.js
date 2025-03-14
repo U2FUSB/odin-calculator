@@ -2,9 +2,11 @@ import { tests } from "./tests.js";
 class Calculator {
     constructor() {
         this.setDisplayableButtons(this.numberButtons);
+        this.setOperationButtons(this.operationButtons);
     }
     allButtons = this.getButtons(".buttons");
     numberButtons = this.getButtons(".numbers");
+    operationButtons = this.getButtons(".operations");
     displayElement = document.querySelector(".display .text-output");
     operationDefinitions = {
         "+": function (num1, num2) {
@@ -20,6 +22,7 @@ class Calculator {
             return num1 / num2;
         },
     };
+    lastDisplayedInput = [];
     getButtons(cssParentClass) {
         const buttons = [];
         getLeafElements(document.querySelectorAll(cssParentClass), buttons);
@@ -32,14 +35,21 @@ class Calculator {
 
         return this.operationDefinitions[operator](num1, num2);
     }
-    /**@param {[Element]} buttons  */
     setDisplayableButtons(buttons) {
-        buttons.forEach(button => {
-            button.addEventListener("click",()=>{
-                this.displayElement.textContent += button.textContent
-            })
-        })
-        // this.displayElement.textContent += buttons.textContent;
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                this.displayElement.textContent += button.textContent;
+            });
+        });
+    }
+    setOperationButtons(buttons) {
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                this.lastDisplayedInput.push(this.displayElement.textContent);
+                this.lastDisplayedInput.push(button.textContent)
+                this.displayElement.textContent = "";
+            });
+        });
     }
 }
 function getLeafElements(elements, leafElementContainer) {
@@ -56,5 +66,6 @@ const calculator = new Calculator();
 console.groupCollapsed("Calculator contents");
 console.log(calculator.allButtons);
 console.log(calculator);
-console.groupEnd("stuff");
+console.groupEnd();
+
 tests();
