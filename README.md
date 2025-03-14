@@ -21,4 +21,5 @@ FUNCTIONAL
 - add `.` input to allow for floats as input. Make sure input is checked if floats are syntactically correct
 - add possibility to remove misspellings using a `backspace` button
 - keyboard support. (GG for that bro...)
+- make calculator functionally extensible
 - simplify css and make equal sign extensible
