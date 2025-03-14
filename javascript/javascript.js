@@ -1,7 +1,7 @@
 import { tests } from "./tests.js";
 class Calculator {
+    allButtons = this.getButtons([]);
     displayElement = document.querySelector(".display .text-output");
-    buttons = [];
     operationDefinitions = {
         "+": function (num1, num2) {
             return num1 + num2;
@@ -16,7 +16,10 @@ class Calculator {
             return num1 / num2;
         },
     };
-    getButtons() {getLeafElements(document.querySelectorAll(".buttons"),this.buttons)}
+    getButtons(buttons) {
+        getLeafElements(document.querySelectorAll(".buttons"), buttons);
+        return buttons;
+    }
     operate(operation) {
         const num1 = operation[0];
         const num2 = operation[2];
@@ -26,19 +29,18 @@ class Calculator {
     }
     display(enteredDigit) {
         this.displayElement.textContent += enteredDigit;
-        // this.displayElement.child
     }
 }
-function getLeafElements(elements,buttons) {
+function getLeafElements(elements, leafElementContainer) {
     Array(...elements).forEach((element) => {
         if (element.children.length !== 0) {
-            getLeafElements(element.children, buttons);
+            getLeafElements(element.children, leafElementContainer);
         } else {
-            buttons.push(element);
+            leafElementContainer.push(element);
         }
     });
 }
 const calculator = new Calculator();
-calculator.getButtons()
-console.log(calculator.buttons);
+console.log(calculator.allButtons);
+console.log(calculator)
 tests();
