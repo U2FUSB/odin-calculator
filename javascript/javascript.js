@@ -23,6 +23,7 @@ class Calculator {
         },
     };
     savedInput = [];
+    cleanDisplayOnNextInput = false;
     getButtons(cssParentClass) {
         const buttons = [];
         getLeafElements(document.querySelectorAll(cssParentClass), buttons);
@@ -38,6 +39,10 @@ class Calculator {
     setDisplayableButtons(buttons) {
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
+                if (this.cleanDisplayOnNextInput) {
+                    this.displayElement.textContent = "";
+                    this.cleanDisplayOnNextInput = false;
+                }
                 this.displayElement.textContent += button.textContent;
             });
         });
@@ -47,7 +52,7 @@ class Calculator {
             button.addEventListener("click", () => {
                 this.savedInput.push(this.displayElement.textContent);
                 this.savedInput.push(button.textContent);
-                this.displayElement.textContent = "";
+                this.cleanDisplayOnNextInput = true;
                 console.log(this.savedInput);
                 if (this.savedInput.length === 4) {
                     const [num1, operator, num2] = this.savedInput;
@@ -57,13 +62,18 @@ class Calculator {
                         num2,
                     ]).toString();
                     this.displayElement.textContent = operationResult;
+                    this.cleanDisplayOnNextInput = true;
                     if (button.textContent === "=") {
                         this.savedInput.splice(0);
                     } else {
-                        this.savedInput.splice(0,3);
+                        this.savedInput.splice(0, 3);
                         this.savedInput.unshift(operationResult);
-                        this.displayElement.textContent = "";
                     }
+                }
+                if (this.savedInput.length > 4) {
+                    this.displayElement.textContent = "Error";
+                    this.savedInput.splice(0);
+                    this.cleanDisplayOnNextInput = true;
                 }
             });
         });
