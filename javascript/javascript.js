@@ -49,7 +49,15 @@ class Calculator {
 
         return this.operationDefinitions[operator](num1, num2).toString();
     }
-    handleInput(button) {
+    handleNumberInput(button) {
+        this.justEnteredAnOperator = false;
+        if (this.cleanDisplayOnNextNumberInput) {
+            this.displayElement.textContent = "";
+            this.cleanDisplayOnNextNumberInput = false;
+        }
+        this.displayElement.textContent += button.textContent;
+    }
+    handleOperationInput(button) {
         if (
             this.displayElement.textContent !== "Error" &&
             this.displayElement.textContent !== "" &&
@@ -99,12 +107,7 @@ class Calculator {
     setDisplayableButtons(buttons) {
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
-                this.justEnteredAnOperator = false;
-                if (this.cleanDisplayOnNextNumberInput) {
-                    this.displayElement.textContent = "";
-                    this.cleanDisplayOnNextNumberInput = false;
-                }
-                this.displayElement.textContent += button.textContent;
+                this.handleNumberInput(button);
             });
         });
     }
@@ -119,8 +122,14 @@ class Calculator {
                         this.justEnteredAnOperator = false;
                         break;
                     case "DEL":
+                        this.displayElement.textContent =
+                            this.displayElement.textContent.substring(
+                                0,
+                                this.displayElement.textContent.length - 1
+                            );
                         break;
                     case "1.2":
+                        this.handleNumberInput(button)
                         break;
                     default:
                         break;
@@ -132,7 +141,7 @@ class Calculator {
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
                 this.cleanDisplayOnNextNumberInput = true;
-                this.handleInput(button);
+                this.handleOperationInput(button);
             });
         });
     }
