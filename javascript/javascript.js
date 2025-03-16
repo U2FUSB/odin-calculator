@@ -1,10 +1,11 @@
-import { tests } from "./tests.js";
 class Calculator {
     constructor() {
         this.setDisplayableButtons(this.numberButtons);
+        this.setSpecialActionButtons(this.specialActionButtons);
         this.setOperationButtons(this.operationButtons);
     }
     numberButtons = this.getButtons(".numbers");
+    specialActionButtons = this.getButtons(".special-actions");
     operationButtons = this.getButtons(".operations");
     displayElement = document.querySelector(".display .text-output");
     operationDefinitions = {
@@ -52,11 +53,11 @@ class Calculator {
         if (
             this.displayElement.textContent !== "Error" &&
             this.displayElement.textContent !== "" &&
+            this.displayElement.textContent !== "." &&
             this.displayElement.textContent.split(".").length - 1 <= 1
         ) {
             switch (this.savedInput.length) {
                 case 0:
-                    console.log(0);
                     if (button.textContent !== "=") {
                         this.savedInput.push(
                             this.displayElement.textContent,
@@ -107,6 +108,26 @@ class Calculator {
             });
         });
     }
+    setSpecialActionButtons(buttons) {
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                switch (button.textContent) {
+                    case "C":
+                        this.displayElement.textContent = "";
+                        this.savedInput.splice(0);
+                        this.cleanDisplayOnNextNumberInput = false;
+                        this.justEnteredAnOperator = false;
+                        break;
+                    case "DEL":
+                        break;
+                    case "1.2":
+                        break;
+                    default:
+                        break;
+                }
+            });
+        });
+    }
     setOperationButtons(buttons) {
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
@@ -117,15 +138,16 @@ class Calculator {
     }
 }
 const calculator = new Calculator();
-const { numberButtons, operationButtons } = calculator;
+const { numberButtons, specialActionButtons, operationButtons } = calculator;
 console.groupCollapsed("Calculator contents");
 console.table(Object.getOwnPropertyDescriptors(calculator));
 console.group("numbers");
 console.table([numberButtons]);
 console.groupEnd();
+console.group("special actoins");
+console.table([specialActionButtons]);
+console.groupEnd();
 console.group("operations");
 console.table([operationButtons]);
 console.groupEnd();
 console.groupEnd();
-
-tests();
