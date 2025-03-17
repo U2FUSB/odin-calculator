@@ -3,7 +3,4 @@
 
 ## TODOs
 ###### STAGE 6: The Extra
-- add a +/- button as number button (maybe replace the 00)
 - keyboard support. (GG for that bro...)
-- make calculator functionally extensible
-- simplify css and make equal sign extensible

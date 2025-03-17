@@ -128,8 +128,8 @@ class Calculator {
                                 this.displayElement.textContent.length - 1
                             );
                         break;
-                    case "1.2":
-                        this.handleNumberInput(button)
+                    case "+/-":
+                        this.displayElement.textContent *= -1;
                         break;
                     default:
                         break;
