@@ -3,7 +3,9 @@ class Calculator {
         this.setDisplayableButtons(this.numberButtons);
         this.setSpecialActionButtons(this.specialActionButtons);
         this.setOperationButtons(this.operationButtons);
+        this.setKeyboardKeys();
     }
+    allButtons = this.getButtons(".buttons");
     numberButtons = this.getButtons(".numbers");
     specialActionButtons = this.getButtons(".special-actions");
     operationButtons = this.getButtons(".operations");
@@ -57,7 +59,30 @@ class Calculator {
         }
         this.displayElement.textContent += button.textContent;
     }
+    handleSpecialActionInput(button) {
+        switch (button.textContent) {
+            case "C":
+                this.displayElement.textContent = "";
+                this.savedInput.splice(0);
+                this.cleanDisplayOnNextNumberInput = false;
+                this.justEnteredAnOperator = false;
+                break;
+            case "DEL":
+                this.displayElement.textContent =
+                    this.displayElement.textContent.substring(
+                        0,
+                        this.displayElement.textContent.length - 1
+                    );
+                break;
+            case "+/-":
+                this.displayElement.textContent *= -1;
+                break;
+            default:
+                break;
+        }
+    }
     handleOperationInput(button) {
+        this.cleanDisplayOnNextNumberInput = true;
         if (
             this.displayElement.textContent !== "Error" &&
             this.displayElement.textContent !== "" &&
@@ -104,6 +129,32 @@ class Calculator {
             }
         }
     }
+    handleKeyboardInput(key) {
+        // INFO: Write the CASE -> GET -> RUN code below once
+        // then extract into a function and just call every time.
+        
+        // SWITCH key.key
+        // CASE found in numberButtons
+        // // GET corresponding button from numberButtons
+        // // RUN handleNumberInput(button)
+        // CASE found in operationButtons
+        // // GET corresponding button from operationButtons
+        // // RUN handleOperationInput(button)
+        // CASE 'Enter'
+        // // GET button for '='
+        // // RUN handleOperationInput(button)
+        // CASE 'Escape'
+        // // GET button for 'C'
+        // // RUN handleSpecialActionInput(button)
+        // CASE 'Backspace'
+        // // GET button for 'DEL'
+        // // RUN handleSpecialActionInput(button)
+        // CASE '_' || 'Shift'
+        // // GET button for '+/-'
+        // // RUN handleSpecialActionInput(button)
+
+        
+    }
     setDisplayableButtons(buttons) {
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
@@ -114,42 +165,34 @@ class Calculator {
     setSpecialActionButtons(buttons) {
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
-                switch (button.textContent) {
-                    case "C":
-                        this.displayElement.textContent = "";
-                        this.savedInput.splice(0);
-                        this.cleanDisplayOnNextNumberInput = false;
-                        this.justEnteredAnOperator = false;
-                        break;
-                    case "DEL":
-                        this.displayElement.textContent =
-                            this.displayElement.textContent.substring(
-                                0,
-                                this.displayElement.textContent.length - 1
-                            );
-                        break;
-                    case "+/-":
-                        this.displayElement.textContent *= -1;
-                        break;
-                    default:
-                        break;
-                }
+                this.handleSpecialActionInput(button);
             });
         });
     }
     setOperationButtons(buttons) {
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
-                this.cleanDisplayOnNextNumberInput = true;
                 this.handleOperationInput(button);
             });
         });
     }
+    setKeyboardKeys() {
+        document.addEventListener("keydown", (key) => {
+            // handleKeyboardInput(key);
+            console.log(key.key)
+        });
+    }
 }
+
 const calculator = new Calculator();
-const { numberButtons, specialActionButtons, operationButtons } = calculator;
+const { allButtons, numberButtons, specialActionButtons, operationButtons } =
+    calculator;
+
 console.groupCollapsed("Calculator contents");
 console.table(Object.getOwnPropertyDescriptors(calculator));
+console.group("all");
+console.table([allButtons]);
+console.groupEnd();
 console.group("numbers");
 console.table([numberButtons]);
 console.groupEnd();
