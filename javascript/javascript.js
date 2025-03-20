@@ -5,10 +5,10 @@ class Calculator {
         this.setOperationButtons(this.operationButtons);
         this.setKeyboardKeys();
     }
-    allButtons = this.getButtons(".buttons");
-    numberButtons = this.getButtons(".numbers");
-    specialActionButtons = this.getButtons(".special-actions");
-    operationButtons = this.getButtons(".operations");
+    allButtons = this.getButtonsFromCss(".buttons");
+    numberButtons = this.getButtonsFromCss(".numbers");
+    specialActionButtons = this.getButtonsFromCss(".special-actions");
+    operationButtons = this.getButtonsFromCss(".operations");
     displayElement = document.querySelector(".display .text-output");
     operationDefinitions = {
         "+": function (num1, num2) {
@@ -30,7 +30,7 @@ class Calculator {
     savedInput = [];
     cleanDisplayOnNextNumberInput = false;
     justEnteredAnOperator = false;
-    getButtons(cssParentClass) {
+    getButtonsFromCss(cssParentClass) {
         function getLeafElements(elements, leafElementContainer) {
             Array(...elements).forEach((element) => {
                 if (element.children.length !== 0) {
@@ -43,6 +43,9 @@ class Calculator {
         const buttons = [];
         getLeafElements(document.querySelectorAll(cssParentClass), buttons);
         return buttons;
+    }
+    getButtonForKeytext(keytext) {
+        return this.allButtons.find((button) => button.textContent === keytext);
     }
     operate(operation) {
         const num1 = operation[0];
@@ -130,30 +133,34 @@ class Calculator {
         }
     }
     handleKeyboardInput(key) {
-        // INFO: Write the CASE -> GET -> RUN code below once
-        // then extract into a function and just call every time.
-        
-        // SWITCH key.key
-        // CASE found in numberButtons
-        // // GET corresponding button from numberButtons
-        // // RUN handleNumberInput(button)
-        // CASE found in operationButtons
-        // // GET corresponding button from operationButtons
-        // // RUN handleOperationInput(button)
-        // CASE 'Enter'
-        // // GET button for '='
-        // // RUN handleOperationInput(button)
-        // CASE 'Escape'
-        // // GET button for 'C'
-        // // RUN handleSpecialActionInput(button)
-        // CASE 'Backspace'
-        // // GET button for 'DEL'
-        // // RUN handleSpecialActionInput(button)
-        // CASE '_' || 'Shift'
-        // // GET button for '+/-'
-        // // RUN handleSpecialActionInput(button)
-
-        
+        const isNumberButton = this.numberButtons.some(
+            (button) => button.textContent === key.key
+        );
+        const isOperationButton = this.operationButtons.some(
+            (button) => button.textContent === key.key
+        );
+        if (isNumberButton) {
+            this.handleNumberInput(this.getButtonForKeytext(key.key));
+        }
+        if (isOperationButton) {
+            this.handleOperationInput(this.getButtonForKeytext(key.key));
+        }
+        switch (key.key) {
+            case "Enter":
+                this.handleOperationInput(this.getButtonForKeytext("="));
+                break;
+            case "C":
+            case "Escape":
+                this.handleSpecialActionInput(this.getButtonForKeytext("C"));
+                break;
+            case "Backspace":
+                this.handleSpecialActionInput(this.getButtonForKeytext("DEL"));
+                break;
+            case "_":
+            case "°":
+                this.handleSpecialActionInput(this.getButtonForKeytext("+/-"));
+                break;
+        }
     }
     setDisplayableButtons(buttons) {
         buttons.forEach((button) => {
@@ -178,8 +185,7 @@ class Calculator {
     }
     setKeyboardKeys() {
         document.addEventListener("keydown", (key) => {
-            // handleKeyboardInput(key);
-            console.log(key.key)
+            this.handleKeyboardInput(key);
         });
     }
 }
