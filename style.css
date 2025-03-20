@@ -18,10 +18,14 @@ body {
 header {
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: green;
+    background-color: rgb(49, 162, 150);
+    border-bottom: 2px outset black;
 }
-nav .element {
-    font-size: 0.75em;
+nav .reference-links .element {
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px outset black;
 }
 nav .flex-wrapper {
     display: flex;
@@ -53,7 +57,7 @@ main {
 }
 .calculator-container .display {
     display: flex;
-    background-color: bisque;
+    background-color: turquoise;
     border: 2px outset black;
     justify-content: end;
 }
