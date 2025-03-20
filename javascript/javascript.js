@@ -60,7 +60,14 @@ class Calculator {
             this.displayElement.textContent = "";
             this.cleanDisplayOnNextNumberInput = false;
         }
-        this.displayElement.textContent += button.textContent;
+        if (
+            !(
+                this.displayElement.textContent.includes(".") &&
+                button.textContent === "."
+            )
+        ) {
+            this.displayElement.textContent += button.textContent;
+        }
     }
     handleSpecialActionInput(button) {
         switch (button.textContent) {
