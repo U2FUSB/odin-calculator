@@ -3,13 +3,12 @@
     padding: 0;
     list-style-type: none;
 }
-html {
+html,
+body {
     width: 100%;
     height: 100%;
 }
 body {
-    width: 100%;
-    height: 100%;
     font-size: 1.1rem;
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     display: flex;
@@ -66,23 +65,19 @@ main {
     overflow: hidden;
     direction: rtl;
 }
-.calculator-container .buttons.flex-wrapper {
+.calculator-container .buttons.flex-wrapper, 
+.calculator-container .left-buttons.flex-wrapper, 
+.calculator-container .left-buttons .special-actions.flex-wrapper {
     display: flex;
 }
 .calculator-container .left-buttons.flex-wrapper {
-    display: flex;
     flex-direction: column;
-}
-.calculator-container .left-buttons .special-actions.flex-wrapper {
-    display: flex;
 }
 .calculator-container .left-buttons .special-actions .clear {
     flex-grow: 1;
     font-size: 100;
 }
-.calculator-container .left-buttons .numbers .zero-to-other.flex-wrapper {
-    display: flex;
-}
+.calculator-container .left-buttons .numbers .zero-to-other.flex-wrapper,
 .calculator-container .left-buttons .numbers .flex-wrapper {
     display: flex;
 }

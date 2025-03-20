@@ -18,13 +18,13 @@ class Calculator {
             return +num1 - +num2;
         },
         "*": function (num1, num2) {
-            return +num1 * +num2;
+            return (+num1 * +num2).toFixed(2);
         },
         "/": function (num1, num2) {
             if (+num2 === 0) {
                 return "Error";
             }
-            return +num1 / +num2;
+            return (+num1 / +num2).toFixed(2);
         },
     };
     savedInput = [];
@@ -133,6 +133,7 @@ class Calculator {
         }
     }
     handleKeyboardInput(key) {
+        console.log(key.key);
         const isNumberButton = this.numberButtons.some(
             (button) => button.textContent === key.key
         );
@@ -149,7 +150,14 @@ class Calculator {
             case "Enter":
                 this.handleOperationInput(this.getButtonForKeytext("="));
                 break;
+            case ",":
+                this.handleNumberInput(this.getButtonForKeytext("."));
+                break;
+            case "o":
+                this.handleNumberInput(this.getButtonForKeytext("00"));
+                break;
             case "C":
+            case "Delete":
             case "Escape":
                 this.handleSpecialActionInput(this.getButtonForKeytext("C"));
                 break;
